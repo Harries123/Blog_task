@@ -1,12 +1,8 @@
 const mongoose = require("mongoose");
 
-const mongoURI = "mongodb://localhost:27017/blogDB"; // Replace with your database URI
+const mongoURI = "mongodb://localhost:27017/BlogDataBase"; 
 
-// Database connection
-mongoose.connect(mongoURI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(mongoURI);
 
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "Connection error:"));

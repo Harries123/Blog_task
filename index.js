@@ -2,14 +2,14 @@ const express = require("express");
 const app = express();
 const PORT = 3000;
 
-// Importing the necessary modules
-app.use(express.json());  // Middleware to parse JSON bodies
 
-// Import models and database connection
+app.use(express.json());
+
+
 const blogModel = require('./model');
 require('./connection');
 
-// Create a blog post
+
 app.post("/blogs", async (req, res) => {
   try {
     const blog = new blogModel(req.body);
@@ -20,7 +20,7 @@ app.post("/blogs", async (req, res) => {
   }
 });
 
-// Get all blog posts
+
 app.get("/blogs", async (req, res) => {
   try {
     const blogs = await blogModel.find();
@@ -30,7 +30,7 @@ app.get("/blogs", async (req, res) => {
   }
 });
 
-// Get a single blog post by ID
+
 app.get("/blogs/:id", async (req, res) => {
   try {
     const blog = await blogModel.findById(req.params.id);
@@ -43,7 +43,7 @@ app.get("/blogs/:id", async (req, res) => {
   }
 });
 
-// Update a blog post by ID
+
 app.put("/blogs/:id", async (req, res) => {
   try {
     const updatedBlog = await blogModel.findByIdAndUpdate(req.params.id, req.body, { new: true });
@@ -56,7 +56,7 @@ app.put("/blogs/:id", async (req, res) => {
   }
 });
 
-// Delete a blog post by ID
+
 app.delete("/blogs/:id", async (req, res) => {
   try {
     const deletedBlog = await blogModel.findByIdAndDelete(req.params.id);
@@ -69,12 +69,12 @@ app.delete("/blogs/:id", async (req, res) => {
   }
 });
 
-// Root endpoint to confirm server is running
+
 app.get("/", (req, res) => {
   res.send("Welcome to the Blog API");
 });
 
-// Start the server
+
 app.listen(PORT, () => {
   console.log(`${PORT} is up and running`);
 });
